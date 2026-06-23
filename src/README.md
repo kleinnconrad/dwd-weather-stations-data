@@ -1,33 +1,8 @@
-# Source Code Architecture
+# src overview
 
 ## Table of Contents
-1. [Folder Structure](#folder-structure)
-2. [Module Overview](#module-overview)
-3. [Script Interactions](#script-interactions)
-
-## Folder Structure
-```text
-src
-|   main.py
-|   __init__.py
-|   
-+---config
-|       settings.py
-|       __init__.py
-|       
-+---extract
-|       metadata.py
-|       scraper.py
-|       __init__.py
-|       
-+---load
-|       writer.py
-|       __init__.py
-|       
-\---transform
-        cleaner.py
-        __init__.py
-```
+1. [Module Overview](#module-overview)
+2. [Script Interactions](#script-interactions)
 
 ## Module Overview
 
