@@ -37,7 +37,7 @@ The final dataset conforms to the following schema:
 
 ## Folder Structure
 ```text
-C:.
+
 |   .gitignore
 |   antigravity.md           - Development guidelines and conventions.
 |   architecture.md          - Architectural documentation.
@@ -67,14 +67,10 @@ C:.
 ```
 
 ## Environment Execution
-The application is designed to be executed locally. To ensure consistency across environments, use the Conda environment named `myenv`. 
-
-Execute the application with the following command:
+The application is designed to be executed locally.
 ```bash
-conda activate myenv
 python -m src.main
 ```
-If new dependencies are introduced, update the environment using the `requirements.txt` file located in the root directory.
 
 ## Analytics
 
