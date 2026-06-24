@@ -1,5 +1,24 @@
 # Metadata Changes Report for 100-Year Stations
 
+> [!NOTE]
+> **Understanding Experimental Design Shifts & Data Implications**
+> 
+> * **Calculation Methodology (`Berechnungs_Methode`):** 
+>   * *Shift:* The historical protocol for determining daily mean temperatures relied on specific formulas weighting three manual measurements taken at fixed local times (e.g., 07:00, 14:00, and 21:00). The modern protocol determines the daily mean based on a true mathematical average of 24 continuous hourly measurements.
+>   * *Data Implication:* Transitioning from a weighted 3-point approximation to a true 24-hour average can introduce an artificial step-change in long-term `Mean_Temp_C` time series, as the two mathematical approaches yield slightly different baselines for the exact same weather.
+> 
+> * **Reporting System and Automation:** 
+>   * *Shift:* Historical climate data was recorded manually by human observers into physical climate diaries. Under the modern system, climate records are automatically extracted directly from the real-time, digital SYNOP (Synoptic) weather reporting pipeline.
+>   * *Data Implication:* While full automation drastically reduces human error, the sudden removal of human smoothing and the shift to raw digital pipelines can alter the variance and consistency of the historical dataset.
+> 
+> * **24-Hour Measurement Window Boundaries:** 
+>   * *Shift:* The temporal definition of a "day" for measurement purposes shifted. Historically, the 24-hour measurement window often concluded at a specific local evening time (e.g., resetting at 21:30 local time). Automated SYNOP reporting shifted this boundary to align with midnight UTC.
+>   * *Data Implication:* This boundary shift can cause extreme events (like a late evening heatwave or an overnight freeze) to be recorded on a different calendar day than they would have been historically. This slightly alters the day-to-day distribution of extreme values.
+> 
+> * **Sensor Hardware (`Sensor_Typ`):** 
+>   * *Shift:* Historical maximum and minimum temperatures were recorded using physical glass-and-mercury/alcohol thermometers, which possessed high thermal inertia. Modern temperature data is recorded using electronic digital sensors (such as the PT100) that sample the air continuously and have very low thermal inertia.
+>   * *Data Implication:* Because digital sensors react almost instantly to brief environmental fluctuations, automated stations tend to capture wider extremes. This introduces a slight systemic upward bias in absolute maximum temperatures (`Max_Temp_C`) and a slight downward bias in absolute minimum temperatures (`Min_Temp_C`) compared to the sluggish responses of historical glass instruments.
+
 | Station ID | Station Name | Date of Change | Attribute | New Value |
 |---|---|---|---|---|
 | 00003 | Aachen | 1904-01-01 | Berechnungs_Methode | KLIDADIGI: Klimadaten nacherfasst (3 Termine:  07, 14, 21 MOZ und Tageswerte) |
