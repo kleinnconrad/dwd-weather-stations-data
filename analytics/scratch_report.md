@@ -1,5 +1,14 @@
 # Metadata Changes Report for 100-Year Stations
 
+> [!IMPORTANT]
+> **Data Homogenization & Parallel Measurements**
+> 
+> When the experimental design of a weather station changes (e.g., transitioning to automated sensors), meteorological institutes conduct **Parallel Measurements** (*Parallelmessungen*). The new and old instruments are run simultaneously for 1-2 years to statistically isolate the exact bias between them.
+> 
+> * **Raw Historical Data:** The dataset used in this repository relies on the DWD's public, unadjusted raw historical data. It contains the exact original observations, meaning it inherently includes the structural biases introduced by these experimental shifts. 
+> * **Raw Parallel Data Unavailability:** The raw, minute-by-minute parallel measurement logs required to manually calculate the exact sensor bias are retained in internal DWD research archives and are **not** available in the standard public Open Data portal used here.
+> * **Homogenized Data:** For official climate change tracking, the DWD applies mathematical offsets derived from those internal parallel measurements to the raw data. This creates a "homogenized dataset" where experimental design shifts are mathematically smoothed out.
+
 > [!NOTE]
 > **Understanding Experimental Design Shifts & Data Implications**
 > 
@@ -18,6 +27,13 @@
 > * **Sensor Hardware (`Sensor_Typ`):** 
 >   * *Shift:* Historical maximum and minimum temperatures were recorded using physical glass-and-mercury/alcohol thermometers, which possessed high thermal inertia. Modern temperature data is recorded using electronic digital sensors (such as the PT100) that sample the air continuously and have very low thermal inertia.
 >   * *Data Implication:* Because digital sensors react almost instantly to brief environmental fluctuations, automated stations tend to capture wider extremes. This introduces a slight systemic upward bias in absolute maximum temperatures (`Max_Temp_C`) and a slight downward bias in absolute minimum temperatures (`Min_Temp_C`) compared to the sluggish responses of historical glass instruments.
+> 
+> ---
+> **Scientific Sources & DWD Documentation:**
+> * *Parallelmessungen an deutschen Klimareferenzstationen: Schlussfolgerungen im Hinblick auf Homogenität und Messunsicherheiten* (Berichte des Deutschen Wetterdienstes, Band 253, 2020)
+> * *Kaspar, F. et al. (2016): Beobachtung von Klima und Klimawandel in Mitteleuropa und Deutschland.* (Details the transition from "Mannheimer Stunden" to automated 24-hour mean methodologies)
+> * *DWD Climate Data Center (CDC) Open Data Portal Documentation:* (Verifies that raw high-resolution parallel measurement logs used for internal mathematical homogenization are excluded from the public historical archives to prevent statistical misinterpretation).
+
 
 | Station ID | Station Name | Date of Change | Attribute | New Value |
 |---|---|---|---|---|
