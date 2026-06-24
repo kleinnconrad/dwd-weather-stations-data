@@ -34,6 +34,12 @@ The final dataset conforms to the following schema:
 - `Latitude` (Float64): The geographic latitude of the station.
 - `Longitude` (Float64): The geographic longitude of the station.
 - `Altitude` (Float64): The elevation of the station in meters.
+- `Sensor_Typ` (String): The historical hardware model of the temperature sensor.
+- `Strahlungsschutz` (String): The historical radiation shield or measurement method used.
+- `Berechnungs_Methode` (String): The historical calculation method used for determining daily temperature aggregates.
+- `Historische_Breite` (Float64): The historically accurate geographic latitude during the measurement period.
+- `Historische_Laenge` (Float64): The historically accurate geographic longitude during the measurement period.
+- `Historische_Hoehe` (Float64): The historically accurate elevation of the station during the measurement period.
 
 ## Folder Structure
 ```text
