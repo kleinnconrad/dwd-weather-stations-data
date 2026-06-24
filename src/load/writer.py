@@ -12,7 +12,13 @@ def get_target_schema() -> pa.Schema:
         ('Bundesland', pa.string()),
         ('Latitude', pa.float64()),
         ('Longitude', pa.float64()),
-        ('Altitude', pa.float64())
+        ('Altitude', pa.float64()),
+        ('Sensor_Typ', pa.string()),
+        ('Strahlungsschutz', pa.string()),
+        ('Berechnungs_Methode', pa.string()),
+        ('Historische_Breite', pa.float64()),
+        ('Historische_Laenge', pa.float64()),
+        ('Historische_Hoehe', pa.float64())
     ])
 
 def write_partitioned_dataset(arrow_table: pa.Table, station_id: str):
