@@ -28,17 +28,25 @@ Manages data persistence. It takes the Apache Arrow table and writes the records
 
 ```mermaid
 graph TD
-    A["main.py"] -->|"1. Fetch Metadata"| B["extract/metadata.py"]
-    A -->|"2. Get Manifest"| C["extract/scraper.py"]
+    %% Configuration
+    G["config/settings.py"] -.-> A["main.py"]
+    G -.-> B["extract/metadata.py"]
+    G -.-> C["extract/scraper.py"]
+    G -.-> F["load/writer.py"]
+
+    %% ETL Execution Flow orchestrated by main.py
+    A -->|"1. Fetch Metadata"| B
+    A -->|"2. Get Manifest"| C
+    A -->|"3. HTTP Download"| HTTP["HTTP Request"]
     
-    A -->|"3. Concurrent Download"| D["HTTP Request"]
-    D -->|"4. Raw Bytes"| E["transform/cleaner.py"]
-    B -->|"Metadata Dictionary"| E
+    HTTP -->|"4. Raw Bytes"| A
+    A -->|"5. Pass Bytes & Metadata"| E["transform/cleaner.py"]
+    E -.->|"6. get_target_schema()"| F
     
-    E -->|"5. Arrow Table"| F["load/writer.py"]
+    E -->|"7. Return Arrow Table"| A
+    A -->|"8. Write Partitioned Data"| F
     
-    G["config/settings.py"] -.-> A
-    G -.-> B
-    G -.-> C
-    G -.-> F
+    %% Storage & Downstream
+    F -->|"9. Save as Parquet"| Lake[("Local Data Lake (data/)")]
+    Lake -->|"10. Consume Data"| Analytics["analytics/*.ipynb"]
 ```
