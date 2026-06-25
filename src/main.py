@@ -6,6 +6,9 @@ from src.extract.metadata import fetch_station_metadata
 from src.extract.scraper import get_payload_manifest
 from src.transform.cleaner import transform_and_enrich
 from src.load.writer import write_partitioned_dataset
+from src.extract.phenology import fetch_phenology_data
+from src.transform.phenology import transform_phenology_data
+from src.load.phenology import write_phenology_dataset
 
 def run_pipeline():
     print("--- Starting DWD Data Ingestion Pipeline ---")
@@ -44,5 +47,13 @@ def run_pipeline():
 
     print("--- DWD Data Ingestion Complete ---")
 
+def run_phenology_pipeline():
+    print("\n--- Starting Phenology Data Ingestion Pipeline ---")
+    raw_content = fetch_phenology_data()
+    arrow_table = transform_phenology_data(raw_content)
+    write_phenology_dataset(arrow_table)
+    print("--- Phenology Data Ingestion Complete ---")
+
 if __name__ == "__main__":
     run_pipeline()
+    run_phenology_pipeline()

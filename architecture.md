@@ -20,12 +20,15 @@ dwd-ingestion-app/
     ├── extract/
     │   ├── __init__.py
     │   ├── metadata.py
+    │   ├── phenology.py
     │   └── scraper.py
     ├── transform/
     │   ├── __init__.py
-    │   └── cleaner.py
+    │   ├── cleaner.py
+    │   └── phenology.py
     └── load/
         ├── __init__.py
+        ├── phenology.py
         └── writer.py
 ```
 

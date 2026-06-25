@@ -18,11 +18,20 @@ Fetches and parses the station metadata manifest. It extracts structural informa
 ### `extract/scraper.py`
 Responsible for analyzing the data directory structure. It retrieves the index page of the data source and uses regular expressions to build a manifest mapping station identifiers to historical archive filenames.
 
+### `extract/phenology.py`
+Downloads the historical sour cherry phenology dataset directly from DWD as raw text.
+
 ### `transform/cleaner.py`
 Processes the raw binary archives. It decompresses the payload in memory, normalizes column names, enforces strict typing, handles missing data, and enriches the dataset with metadata. It outputs an Apache Arrow table.
 
+### `transform/phenology.py`
+Processes the semicolon-separated raw phenology data, cleaning column names and filtering for the specific start-of-bloom events. Generates a PyArrow table as output.
+
 ### `load/writer.py`
 Manages data persistence. It takes the Apache Arrow table and writes the records to the file system as Parquet files, applying a Hive-style partition strategy based on geographic regions.
+
+### `load/phenology.py`
+Saves the phenology PyArrow table to a compressed Parquet file under `data/processed/` and outputs an analytical summary.
 
 ## Script Interactions
 

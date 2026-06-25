@@ -11,8 +11,11 @@
 This application downloads, transforms, and stores historical daily climate observation data for weather stations located in Germany. It processes the raw data into a structured schema and saves it locally in an optimized columnar format for analytical querying.
 
 ## Data Source
-The primary data source is the open data portal of the Deutscher Wetterdienst (DWD). Specifically, the application targets the historical daily climate data (Tageswerte KL) located at:
+The primary data source is the open data portal of the Deutscher Wetterdienst (DWD). Specifically, the application targets:
+1. The historical daily climate data (Tageswerte KL) located at:
 `https://opendata.dwd.de/climate_environment/CDC/observations_germany/climate/daily/kl/historical/`
+2. The historical phenology data for sour cherries (Sauerkirsche) located at:
+`https://opendata.dwd.de/climate_environment/CDC/observations_germany/phenology/annual_reporters/fruit/historical/PH_Jahresmelder_Obst_Sauerkirsche_1925_2024_hist.txt`
 
 This directory contains zip archives for each weather station. Each archive contains historical climate measurements recorded up to the end of the previous calendar year. The application downloads these archives, extracts the relevant measurements, and enriches them with station metadata, including geographic coordinates and the corresponding state (Bundesland).
 
@@ -41,6 +44,11 @@ The final dataset conforms to the following schema:
 - `Historische_Laenge` (Float64): The historically accurate geographic longitude during the measurement period.
 - `Historische_Hoehe` (Float64): The historically accurate elevation of the station during the measurement period.
 
+The phenology dataset is written as `kirschbluete_doy.parquet` under `data/processed/` and conforms to the following schema:
+- `Stations_id` (Int32): The unique identifier for the observation station.
+- `Referenzjahr` (Int32): The year the observation was made.
+- `Jultag` (Int32): The Julian day of the year on which the sour cherry bloom started (Phase_id 5).
+
 ## Folder Structure
 ```text
 
@@ -60,15 +68,18 @@ The final dataset conforms to the following schema:
     |       
     +---extract              - Modules for data downloading and scraping.
     |       metadata.py
+    |       phenology.py
     |       scraper.py
     |       __init__.py
     |       
     +---load                 - Modules for writing data to disk.
+    |       phenology.py
     |       writer.py
     |       __init__.py
     |       
     \---transform            - Modules for parsing and cleaning data.
             cleaner.py
+            phenology.py
             __init__.py
 ```
 
@@ -87,3 +98,4 @@ The `analytics` directory contains a series of Jupyter Notebooks that perform hi
 - **`station_timeseries.ipynb`**: Visualizes the long-term trends by plotting the yearly average of minimum, maximum, and mean temperatures for each century-old station.
 - **`station_anomalies.ipynb`**: Generates "warming stripe" bar charts that illustrate the yearly deviation of the maximum temperature compared to the station's historical average.
 - **`station_hot_days.ipynb`**: Calculates and visualizes the frequency of extreme heat days (days with a maximum temperature exceeding 32°C) per year for each station.
+- **`kirschbluete_timeseries.ipynb`**: Analyzes and plots the time series of the Julian day when the sour cherry bloom started, showing both the individual station data and average overall trends.
