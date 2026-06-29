@@ -32,6 +32,16 @@
 >   * *Shift:* Historically, physical glass thermometers were mounted at a standard height of 2 meters and were predominantly read and maintained by amateur volunteer observers (such as teachers, farmers, or local officials). Today, modern stations operate fully autonomously without daily human intervention.
 >   * *Data Implication:* Relying on human observers introduced vulnerabilities absent in modern automated data. Reading a glass meniscus at a 2-meter height could easily introduce parallax errors depending on the observer's eye level. Furthermore, amateur observers might have occasionally sent untrained proxies (like family members) to take readings, or retrospectively guessed/imputed missing data if they were sick or away on holiday for a while, potentially impacting the consistency of the historical record.
 > 
+> * **Dynamic Inertia: The Time Constant Model ($\tau$)**
+>   * When the ambient temperature changes suddenly (e.g., due to a warm gust of wind), the thermometer does not follow this change immediately. In control and measurement engineering, this physical behavior is modeled as a first-order lag element (PT1 element). It acts like a physical low-pass filter on the signal.
+>   * The change in the measured sensor temperature $T_{Sensor}$ as a function of the true ambient air temperature $T_{Air}$ is described by the following linear differential equation (Newton's law of cooling):
+>     $$\frac{dT_{Sensor}(t)}{dt} = \frac{1}{\tau} \cdot (T_{Air}(t) - T_{Sensor}(t))$$
+>   * The decisive measure for measurement inertia is the time constant $\tau$ (Tau). It indicates the time it takes for the instrument to display $63.2\%$ ($1 - 1/e$) of a sudden temperature step. Solving the differential equation for a sudden jump in ambient temperature yields the exponential approximation:
+>     $$T_{Sensor}(t) = T_{Air} + (T_{Start} - T_{Air}) \cdot e^{-\frac{t}{\tau}}$$
+>   * **The fundamental hardware differences:**
+>     * **Mercury Thermometer ($Hg$):** Has an enormous thermal mass (thick Jena glass, heavy liquid metal). It takes a long time for the ambient heat to penetrate the interior. The time constant $\tau_{Hg}$ with typical ventilation in the weather screen is around 40 to 60 seconds. Brief second-long spikes (micro-turbulence) are simply swallowed by this sluggish physical low-pass filter.
+>     * **Platinum Resistance ($Pt100$):** Consists of extremely low mass (a tiny ceramic chip with a microscopic platinum film or wire) with excellent thermal conductivity. The time constant $\tau_{Pt100}$ is approx. 1 to 5 seconds. The sensor responds in real-time to the smallest fluctuation.
+> 
 > ---
 > **Scientific Sources & DWD Documentation:**
 > * *Parallelmessungen an deutschen Klimareferenzstationen: Schlussfolgerungen im Hinblick auf Homogenität und Messunsicherheiten* (Berichte des Deutschen Wetterdienstes, Band 253, 2020)
