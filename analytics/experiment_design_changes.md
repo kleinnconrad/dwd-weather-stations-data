@@ -12,12 +12,12 @@
 > [!NOTE]
 > **Understanding Experimental Design Shifts & Data Implications**
 > 
-> * **Calculation Methodology (`Berechnungs_Methode`):** 
->   * *Shift:* The historical protocol for determining daily mean temperatures relied on specific formulas weighting three manual measurements taken at fixed local times (e.g., 07:00, 14:00, and 21:00). The modern protocol determines the daily mean based on a true mathematical average of 24 continuous hourly measurements.
+> * **Calculation Methodology (`Berechnungs_Methode`) & The MIRAKEL System (2001):** 
+>   * *Shift:* Historically, before this architectural change was enforced, a human observer checked the temperature 3 times a day at fixed local times (e.g., 07:00, 14:00, and 21:00) and the daily mean was calculated using a weighted formula. In 2001, the DWD introduced a new central IT database system called **MIRAKEL**. With this modernization, temperature is now measured continuously, and the modern protocol determines the daily mean based on a true mathematical average of 24 continuous hourly measurements.
 >   * *Data Implication:* Transitioning from a weighted 3-point approximation to a true 24-hour average can introduce an artificial step-change in long-term `Mean_Temp_C` time series, as the two mathematical approaches yield slightly different baselines for the exact same weather.
 > 
 > * **Reporting System and Automation:** 
->   * *Shift:* Historical climate data was recorded manually by human observers into physical climate diaries. Under the modern system, climate records are automatically extracted directly from the real-time, digital SYNOP (Synoptic) weather reporting pipeline.
+>   * *Shift:* Historical climate data was recorded manually by human observers into physical climate diaries. Under the modern system (fully integrating into MIRAKEL from 2001 onwards), climate records are automatically extracted directly from the real-time, digital SYNOP (Synoptic) weather reporting pipeline.
 >   * *Data Implication:* While full automation drastically reduces human error, the sudden removal of human smoothing and the shift to raw digital pipelines can alter the variance and consistency of the historical dataset.
 > 
 > * **24-Hour Measurement Window Boundaries:** 
