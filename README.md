@@ -53,11 +53,16 @@ The phenology dataset is written as `kirschbluete_doy.parquet` under `data/proce
 ```text
 
 |   .gitignore
-|   antigravity.md           - Development guidelines and conventions.
 |   architecture.md          - Architectural documentation.
 |   requirements.txt         - Python dependency list.
 |   README.md                - This documentation file.
 |   
++---.agents                  - AI agent configuration and rules.
+|       AGENTS.md            - Development guidelines and conventions.
+|       
++---tests                    - Unit and integration tests.
+|       __init__.py
+|       
 \---src                      - Core application logic.
     |   main.py              - Application entry point.
     |   __init__.py
